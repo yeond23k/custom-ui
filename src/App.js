@@ -17,6 +17,7 @@ const App = () => {
       <Switch>
         {menus.map((menu) => (
           <Route
+            key={menu.path}
             exact={menu.path === "/"}
             path={menu.path}
             component={menu.component}

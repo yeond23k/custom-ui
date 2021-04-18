@@ -1,16 +1,29 @@
-import React from "react";
-import useInput from "../hooks/useInput";
+import React, { useState, useEffect } from "react";
+import Timer from "../components/Timer";
 
 const Home = () => {
-  const input = useInput("", "Number");
+  const [timer, setTimer] = useState(false);
   return (
-    <div>
+    <>
+      <h2>HOME</h2>
       <div>
-        <h2>#1. Input</h2>
-        <input placeholder="input value" {...input} />
-        <button onClick={() => alert(input.value)}>click</button>
+        <h4>Timer</h4>
+        <button onClick={() => setTimer(false)}>stop</button>
+        <div>
+          <input disabled={!timer} />
+          <button disabled={timer} onClick={() => setTimer(true)}>
+            인증번호 요청
+          </button>
+          {timer && <button>제출</button>}
+        </div>
+        {timer && (
+          <div>
+            제한시간 :{" "}
+            <Timer start={timer} time={180} callback={() => setTimer(false)} />
+          </div>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 
